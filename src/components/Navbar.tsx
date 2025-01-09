@@ -2,6 +2,7 @@ import { useState } from "react";
 
 export default function Navbar() {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
     <nav className="bg-gray-800 text-white shadow-md">
@@ -10,61 +11,29 @@ export default function Navbar() {
         <div className="flex items-center space-x-8">
           {/* Logo */}
           <div className="text-xl font-bold flex items-center space-x-2">
-            <img
-              src="/logo.png" 
-              alt="Firstbench Logo"
-              className="h-10"
-            />
+            <img src="/logo.png" alt="Firstbench Logo" className="h-10" />
             <span>Firstbench</span>
           </div>
 
-          {/* Navbar Links */}
+          {/* Navbar Links (Desktop) */}
           <div className="hidden md:flex items-center space-x-6">
-            {/* Dashboard */}
-            <div className="flex items-center space-x-2">
-              <img src="/dashboard.svg" alt="Dashboard" className="h-6" />
-              <a href="#" className="hover:text-teal-400">Dashboard</a>
-            </div>
-            {/* FirstGuru */}
-            <div className="flex items-center space-x-2">
-              <img src="/stars.svg" alt="FirstGuru" className="h-6" />
-              <a href="#" className="hover:text-teal-400">FirstGuru</a>
-            </div>
-            {/* TownHall */}
-            <div className="flex items-center space-x-2">
-              <img src="/townhall.svg" alt="TownHall" className="h-6" />
-              <a href="#" className="hover:text-teal-400">TownHall</a>
-            </div>
-            {/* AI Evaluation */}
-            <div className="flex items-center space-x-2">
-              <img src="/lightning.svg" alt="AI Evaluation" className="h-6" />
-              <a href="#" className="hover:text-teal-400">AI Evaluation</a>
-            </div>
-            {/* Performance */}
-            <div className="flex items-center space-x-2">
-              <img src="/performance.svg" alt="Performance" className="h-6" />
-              <a href="#" className="hover:text-teal-400">Performance</a>
-            </div>
-            {/* Mock Test */}
-            <div className="flex items-center space-x-2">
-              <img src="/test.svg" alt="Mock Test" className="h-6" />
-              <a href="#" className="hover:text-teal-400">Mock Test</a>
-            </div>
+            <NavLinks />
           </div>
         </div>
 
         {/* Right section */}
         <div className="flex items-center space-x-4">
-            <div>
-                <img src="/bell.svg" alt="bell"  className="h-6"/>
-            </div>
+          {/* Bell Icon */}
+          <div>
+            <img src="/bell.svg" alt="bell" className="h-6" />
+          </div>
           {/* Profile Box */}
           <div className="relative">
             <button
               onClick={() => setDropdownOpen(!isDropdownOpen)}
-              className="flex items-center justify-center space-x-2 bg-gray-900 text-white px-3 py-1 rounded-md focus:outline-none "
+              className="flex items-center justify-center space-x-2 bg-gray-900 text-white px-3 py-1 rounded-md focus:outline-none"
             >
-              <div className="w-8  h-8 rounded-md bg-red-300   flex items-center justify-center text-2xl font-normal text-red-950">
+              <div className="w-8 h-8 rounded-md bg-red-300 flex items-center justify-center text-2xl font-normal text-red-950">
                 P
               </div>
               <span className="font-medium">Profile</span>
@@ -101,8 +70,72 @@ export default function Navbar() {
               </div>
             )}
           </div>
+
+          {/* Hamburger Icon (Mobile) */}
+          <button
+            onClick={() => setMobileMenuOpen(!isMobileMenuOpen)}
+            className="md:hidden focus:outline-none"
+          >
+            <img src="/hamburger.svg" alt="Hamburger Menu" className="h-6" />
+          </button>
         </div>
       </div>
+
+      {/* Mobile Menu */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden bg-gray-800 text-white px-4 py-4 space-y-4">
+          <NavLinks />
+        </div>
+      )}
     </nav>
+  );
+}
+
+function NavLinks() {
+  return (
+    <>
+      {/* Dashboard */}
+      <div className="flex items-center space-x-2">
+        <img src="/dashboard.svg" alt="Dashboard" className="h-6" />
+        <a href="#" className="hover:text-teal-400">
+          Dashboard
+        </a>
+      </div>
+      {/* FirstGuru */}
+      <div className="flex items-center space-x-2">
+        <img src="/stars.svg" alt="FirstGuru" className="h-6" />
+        <a href="#" className="hover:text-teal-400">
+          FirstGuru
+        </a>
+      </div>
+      {/* TownHall */}
+      <div className="flex items-center space-x-2">
+        <img src="/townhall.svg" alt="TownHall" className="h-6" />
+        <a href="#" className="hover:text-teal-400">
+          TownHall
+        </a>
+      </div>
+      {/* AI Evaluation */}
+      <div className="flex items-center space-x-2">
+        <img src="/lightning.svg" alt="AI Evaluation" className="h-6" />
+        <a href="#" className="hover:text-teal-400">
+          AI Evaluation
+        </a>
+      </div>
+      {/* Performance */}
+      <div className="flex items-center space-x-2">
+        <img src="/performance.svg" alt="Performance" className="h-6" />
+        <a href="#" className="hover:text-teal-400">
+          Performance
+        </a>
+      </div>
+      {/* Mock Test */}
+      <div className="flex items-center space-x-2">
+        <img src="/test.svg" alt="Mock Test" className="h-6" />
+        <a href="#" className="hover:text-teal-400">
+          Mock Test
+        </a>
+      </div>
+    </>
   );
 }
